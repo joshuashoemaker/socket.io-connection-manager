@@ -1,0 +1,22 @@
+{
+  "name": "socket.io-connection-manager",
+  "version": "1.0.0",
+  "description": "Creates private sessions for socket.io websocket connections for clients and server to join",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seaneduffy/socket.io-connection-manager.git"
+  },
+  "author": "Sean Duffy <seaneduffy@gmail.com> (seaneduffy.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seaneduffy/socket.io-connection-manager/issues"
+  },
+  "homepage": "https://github.com/seaneduffy/socket.io-connection-manager",
+  "dependencies": {
+    "socket.io": "^1.4.6"
+  }
+}
