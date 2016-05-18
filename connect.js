@@ -1,14 +1,19 @@
 'use strict';
 
-var connections = {}, onConnectionCallback;
+var connections = [], onConnectionCallback;
 
 function Connection(socket) {
 	this.id = socket.conn.id;
 	this.socket = socket;
-	this.session = 0;
+	this.session = false;
+	this.label = '';
 	this.socket.on('disconnect', () => {
-		this.disconnect();
+		connections.splice(connections.indexOf(this), 1);
 	});
+	this.socket.on('register', (data) => {
+		this.label = data.label;
+	});
+	connections.push(this);
 }
 
 Connection.prototype.getId = function() {
@@ -28,16 +33,20 @@ Connection.prototype.emit = function(event, data) {
 };
 
 Connection.prototype.disconnect = function() {
-	delete connections[this.id];
+	this.socket.disconnect(true);
+	connections.splice(connections.indexOf(this), 1);
 };
 
 Connection.prototype.addListener = function(event, callback) {
 	this.socket.on(event, callback);
 };
 
+Connection.prototype.getLabel = function() {
+	return this.label;
+}
+
 function onConnection(socket) {
-	connections[socket.conn.id] = new Connection(socket);
-	onConnectionCallback(connections[socket.conn.id]);
+	onConnectionCallback(new Connection(socket));
 }
 
 module.exports = function($http, $onConnectionCallback) {

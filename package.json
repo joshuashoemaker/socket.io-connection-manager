@@ -1,6 +1,6 @@
 {
   "name": "socket.io-connection-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creates private sessions for socket.io websocket connections for clients and server to join",
   "main": "index.js",
   "scripts": {
